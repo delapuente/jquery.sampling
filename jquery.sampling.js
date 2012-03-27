@@ -12,7 +12,11 @@
     var methods = {
         init: function(options) {
             settings = $.extend({
-                sample_class: '_s'
+                sampleClass: '_s',
+                defaultFlags: {
+                    ensureText:false,
+                    clearSamples:true
+                }
             }, options || {});
         },
 
@@ -23,7 +27,7 @@
         gather: function() {
             var $c = $('<div>');
             this.each(function() {
-                $('.'+settings.sample_class, this).each(function() {
+                $('.'+settings.sampleClass, this).each(function() {
                     $c.append(this);
                 });
             });
@@ -31,10 +35,7 @@
         },
 
         'new': function(maps, flags) {
-            flags = $.extend({
-                ensureText:false,
-                clearSamples:true
-            }, flags || {});
+            flags = $.extend({}, settings.defaultFlags, flags || {});
 
             // Normalize arguments
             if (!$.isArray(maps)) {
@@ -62,14 +63,31 @@
                 }
 
                 // Remove sample class and all sample sub elements if required
-                n.removeClass(settings.sample_class);
+                n.removeClass(settings.sampleClass);
                 if (flags.clearSamples) {
-                    $('.'+settings.sample_class, n).remove();
+                    $('.'+settings.sampleClass, n).remove();
                 }
 
                 result.push(n[0]);
             }
             return $(result);
+        },
+
+        option: function(opts, value) {
+            // Get form
+            if (typeof value == 'undefined' && typeof opts != 'object') {
+                return settings[opts];
+            }
+
+            // Normalize opts: it should be a map
+            if (typeof opts != 'object'){
+                var d = {};
+                d[opts] = value;
+                opts = d;
+            }
+
+            // Set form
+            settings = $.extend(settings, opts);
         }
     };
 
