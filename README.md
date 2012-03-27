@@ -16,7 +16,7 @@ The original concept assumes you will use HTML Sampling / Template animation in 
 This plugin enhances the coordination among designers and programmers. Look at this awesome interaction!
 
 ## Designer
-He decorates part of the HTML with `_s` (or something else) classes:
+He decorates part of the HTML with `_s` (or something else) class:
 
 ```html
 <table id="spaceship_table" border="1">
