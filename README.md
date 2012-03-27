@@ -79,10 +79,10 @@ var $samples = $(document).sampling('gather');
 var $row_sample = $samples.sampling('.standard');
 ```
 
-3.- Customize it:
+3.- Customize and instanciate it:
 
 ```javascript
-var $row = $row_sample.sampling('new', [
+var $rows = $row_sample.sampling('new', [
     {
         '.id':1,
         '.name':'Tie Fighter',
@@ -107,7 +107,7 @@ var $row = $row_sample.sampling('new', [
 4.- Append to the table:
 
 ```javascript
-$('#spaceship_table').append($row);
+$('#spaceship_table').append($rows);
 ```
 
 Features
