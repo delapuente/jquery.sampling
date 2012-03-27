@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>jQuery Sampling: designer/programmer cooperation tool</title>
+        <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+        <script src="../jquery.sampling.js"></script>
+        <script type="text/javascript" language="javascript" charset="utf-8">
+        <!--
+        var $samples, $row_sample, $row;
+        $(document).ready(function() {
+            //1: Gather samples
+            $samples = $(document).sampling('gather');
+
+            //2: Select one example
+            $row_sample = $samples.sampling('.special');
+
+            function fake(name) {
+                return {
+                    '.id':2,
+                    '.name':$('<u>').text(name),
+                    '.type':'tipo2',
+                    '.affiliation':'afiliación2'
+                }
+            }
+
+            //3: Customize it!
+            $row = $row_sample.sampling('new', [
+                {
+                    '.id':1,
+                    '.name':$('<u>').text('nombre'),
+                    '.type':'tipo',
+                    '.affiliation':'afiliación'
+                },
+                fake
+            ], {}, 'asmodeo');
+
+            //4: Add to the document
+            $('#spaceship_table').append($row);
+        });
+        -->
+        </script>
+    </head>
+    <body>
+        <table id="spaceship_table" border="1">
+            <summary>Star Wars Spaceship Table</summary>
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Affiliation</th>
+            </tr>
+            <tr class="_s odd" title="Odd row">
+                <td class="id">99</td>
+                <td class="name">Death Star</td>
+                <td class="type">Special</td>
+                <td class="affiliation">Galactic Empire</td>
+            </tr>
+            <tr class="_s even" title="Even row">
+                <td class="id">100</td>
+                <td class="name">Y-Wing Fighter</td>
+                <td class="type">Starfighter</td>
+                <td class="affiliation">Rebel Alliance</td>
+            </tr>
+            <tr class="_s odd special" title="Special" style="background-color:pink; font-weight:bold;">
+                <td class="id">99</td>
+                <td class="name">Death Star</td>
+                <td class="type">Special</td>
+                <td class="affiliation">Galactic Empire</td>
+            </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
