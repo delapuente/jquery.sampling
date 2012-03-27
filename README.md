@@ -76,13 +76,13 @@ var $samples = $(document).sampling('gather');
 2.- Select one example:
 
 ```javascript
-$row_sample = $samples.sampling('.standard');
+var $row_sample = $samples.sampling('.standard');
 ```
 
 3.- Customize it:
 
 ```javascript
-$row = $row_sample.sampling('new', [
+var $row = $row_sample.sampling('new', [
     {
         '.id':1,
         '.name':'Tie Fighter',
