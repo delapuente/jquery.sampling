@@ -14,25 +14,27 @@
             //2: Select one example
             $row_sample = $samples.sampling('.special');
 
-            function fake(name) {
-                return {
-                    '.id':2,
-                    '.name':$('<u>').text(name),
-                    '.type':'tipo2',
-                    '.affiliation':'afiliación2'
-                }
-            }
-
             //3: Customize it!
             $row = $row_sample.sampling('new', [
                 {
-                    '.id':1,
-                    '.name':$('<u>').text('nombre'),
-                    '.type':'tipo',
-                    '.affiliation':'afiliación'
+                    id:1,
+                    name:'Tie Fighter',
+                    type:'Starfighter',
+                    affiliation:'Galactic Empire'
                 },
-                fake
-            ], {}, 'asmodeo');
+                {
+                    id:2,
+                    name:'X-Wing Fighter',
+                    type:'Starfighter',
+                    affiliation:'Rebel Alliance'
+                },
+                {
+                    id:3,
+                    name:'Imperial Star Destroyer',
+                    type:'Imperial cruiser',
+                    affiliation:'Galactic Empire'
+                }
+            ]);
 
             //4: Add to the document
             $('#spaceship_table').append($row);

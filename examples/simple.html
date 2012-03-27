@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>jQuery Sampling: designer/programmer cooperation tool</title>
+        <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+        <script src="../jquery.sampling.js"></script>
+        <script type="text/javascript" language="javascript" charset="utf-8">
+        <!--
+        var $samples, $row_sample, $row;
+        $(document).ready(function() {
+            //1: Gather samples
+            $samples = $(document).sampling('gather');
+
+            //2: Select one example
+            $row_sample = $samples.sampling('.standard');
+
+            //3: Customize it!
+            $row = $row_sample.sampling('new', [
+                {
+                    '.id':1,
+                    '.name':'Tie Fighter',
+                    '.type':'Starfighter',
+                    '.affiliation':'Galactic Empire'
+                },
+                {
+                    '.id':2,
+                    '.name':'X-Wing Fighter',
+                    '.type':'Starfighter',
+                    '.affiliation':'Rebel Alliance'
+                },
+                {
+                    '.id':3,
+                    '.name':'Imperial Star Destroyer',
+                    '.type':'Imperial cruiser',
+                    '.affiliation':'Galactic Empire'
+                }
+            ]);
+
+            //4: Add to the document
+            $('#spaceship_table').append($row);
+        });
+        -->
+        </script>
+    </head>
+    <body>
+        <table id="spaceship_table" border="1">
+            <summary>Star Wars Spaceship Table</summary>
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Affiliation</th>
+            </tr>
+            <!-- Use these samples if you need to distinguish between even and odd rows -->
+            <tr class="_s odd" title="Odd row">
+                <td class="id">sample_id1</td>
+                <td class="name">sample_name1</td>
+                <td class="type">sample_type1</td>
+                <td class="affiliation">sample_affiliation1</td>
+            </tr>
+            <tr class="_s even" title="Even row" style="background-color:grey;">
+                <td class="id">sample_id2</td>
+                <td class="name">sample_name2</td>
+                <td class="type">sample_type2</td>
+                <td class="affiliation">sample_affiliation2</td>
+            </tr>
+            <!-- Use this to highlight some special row -->
+            <tr class="_s odd highlight" title="Special" style="background-color:pink; font-weight:bold;">
+                <td class="id">sample_id3</td>
+                <td class="name">sample_name3</td>
+                <td class="type">sample_type3</td>
+                <td class="affiliation">sample_affiliation3</td>
+            </tr>
+            <!-- Use these if no distinction is required -->
+            <tr class="_s standard" title="Standard">
+                <td class="id">sample_id4</td>
+                <td class="name">sample_name4</td>
+                <td class="type">sample_type4</td>
+                <td class="affiliation">sample_affiliation4</td>
+            </tr>
+            <tr class="_s standard" title="Standard">
+                <td class="id">sample_id5</td>
+                <td class="name">sample_name5</td>
+                <td class="type">sample_type5</td>
+                <td class="affiliation">sample_affiliation5</td>
+            </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
