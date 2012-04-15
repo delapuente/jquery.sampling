@@ -123,6 +123,7 @@ Features
 API
 ---
 
+'''javascript
 // $.sampling(options)
 
 /*
@@ -279,7 +280,7 @@ function generateItems(index, limit) {
 
 // Note you need to specify flags if you want to pass arguments to the geneation function
 var severalRows = rowSample.sampling('new', generateItems, {}, 10)
-
+'''
 
 Examples
 --------
