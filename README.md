@@ -303,10 +303,10 @@ First release candidate.
 
 API changed to be more homogeneus:
 
-'''javascript
+```javascript
 // former $row_sample = $samples.sampling(selector) changes to:
 $row_sample = $samples.sampling('select', selector);
-'''
+```
 
 ### 1.0.0-alpha.1
 
