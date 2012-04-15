@@ -10,37 +10,43 @@
         <script src="../jquery.sampling.js"></script>
         <script type="text/javascript" language="javascript" charset="utf-8">
             var $samples, $row_sample, $row;
+
             $(document).ready(function() {
+                // Get data
+                var maps = [];
+                $.ajax({
+                    async: false,
+                    url:'data.json',
+                    dataType: 'json',
+                    success: function(data) {
+                        $.each(data, function(index, ship){
+                            maps.push({
+                                '.id':ship.id,
+                                '.name':ship.name,
+                                '.type':ship.type,
+                                '.affiliation':ship.affiliation
+                            });
+                        });
+                    }
+                });
+
                 //1: Gather samples
                 $samples = $(document).sampling('gather');
 
-                //2: Select one example
-                $row_sample = $samples.sampling('select', '.standard');
+                var $table_body = $('#spaceship_table tbody');
+                $.each(maps, function(index, ship) {
+                    var parity_class = index % 2 == 0 ? '.odd' : '.even';
 
-                //3: Customize it!
-                $rows = $row_sample.sampling('new', [
-                    {
-                        '.id':1,
-                        '.name':'Tie Fighter',
-                        '.type':'Starfighter',
-                        '.affiliation':'Galactic Empire'
-                    },
-                    {
-                        '.id':2,
-                        '.name':'X-Wing Fighter',
-                        '.type':'Starfighter',
-                        '.affiliation':'Rebel Alliance'
-                    },
-                    {
-                        '.id':3,
-                        '.name':'Imperial Star Destroyer',
-                        '.type':'Imperial cruiser',
-                        '.affiliation':'Galactic Empire'
-                    }
-                ]);
+                    //2: Select one example
+                    $row_sample = $samples.sampling('select', parity_class);
 
-                //4: Add to the table
-                $('#spaceship_table tbody').append($rows);
+                    //3: Customize it!
+                    $row = $row_sample.sampling('new', ship);
+
+                    //4: Add to the document
+                    $table_body.append($row);
+                });
+
             });
         </script>
     </head>
@@ -63,14 +69,14 @@
                     <td class="type">sample_type1</td>
                     <td class="affiliation">sample_affiliation1</td>
                 </tr>
-                <tr class="_s even" title="Even row">
+                <tr class="_s even" title="Even row" style="background-color:grey;">
                     <td class="id">sample_id2</td>
                     <td class="name">sample_name2</td>
                     <td class="type">sample_type2</td>
                     <td class="affiliation">sample_affiliation2</td>
                 </tr>
                 <!-- Use this to highlight some special row -->
-                <tr class="_s odd highlight" title="Special">
+                <tr class="_s odd highlight" title="Special" style="background-color:pink; font-weight:bold;">
                     <td class="id">sample_id3</td>
                     <td class="name">sample_name3</td>
                     <td class="type">sample_type3</td>

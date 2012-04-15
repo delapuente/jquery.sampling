@@ -9,8 +9,27 @@
 
         <script src="../jquery.sampling.js"></script>
         <script type="text/javascript" language="javascript" charset="utf-8">
-            var $samples, $row_sample, $row;
+            var $samples, $row_sample, $rows;
+
             $(document).ready(function() {
+                // Get data
+                var maps = [];
+                $.ajax({
+                    async: false,
+                    url:'data.json',
+                    dataType: 'json',
+                    success: function(data) {
+                        $.each(data, function(index, ship){
+                            maps.push({
+                                '.id':ship.id,
+                                '.name':ship.name,
+                                '.type':ship.type,
+                                '.affiliation':ship.affiliation
+                            });
+                        });
+                    }
+                });
+
                 //1: Gather samples
                 $samples = $(document).sampling('gather');
 
@@ -18,26 +37,7 @@
                 $row_sample = $samples.sampling('select', '.standard');
 
                 //3: Customize it!
-                $rows = $row_sample.sampling('new', [
-                    {
-                        '.id':1,
-                        '.name':'Tie Fighter',
-                        '.type':'Starfighter',
-                        '.affiliation':'Galactic Empire'
-                    },
-                    {
-                        '.id':2,
-                        '.name':'X-Wing Fighter',
-                        '.type':'Starfighter',
-                        '.affiliation':'Rebel Alliance'
-                    },
-                    {
-                        '.id':3,
-                        '.name':'Imperial Star Destroyer',
-                        '.type':'Imperial cruiser',
-                        '.affiliation':'Galactic Empire'
-                    }
-                ]);
+                $rows = $row_sample.sampling('new', maps);
 
                 //4: Add to the table
                 $('#spaceship_table tbody').append($rows);

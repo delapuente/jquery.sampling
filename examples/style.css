@@ -1,0 +1,45 @@
+table {
+    background:#C11314;
+    border:solid #C11314 2px;
+    border-radius:20px;
+    margin:0 auto;
+    box-shadow:5px 5px 10px grey;
+}
+
+td, th {
+    padding:4px 25px;
+}
+
+td {
+    background-color:white;
+}
+
+th {
+    color:white;
+}
+
+tbody tr:last-child td:first-child {
+    border-bottom-left-radius:20px;
+}
+
+tbody tr:last-child td:last-child {
+    border-bottom-right-radius:20px;
+}
+
+.odd td {
+    background-color:#888;
+    color:white;
+}
+
+.even td {
+    background-color:#eee;
+}
+
+.highlight {
+    color:#ddd;
+    text-shadow:#888 1px 1px;
+}
+
+.highlight td {
+    background-color:#222;
+}

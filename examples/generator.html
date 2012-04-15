@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>jQuery Sampling: designer/programmer cooperation tool</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <h1>Star Wars Spaceship Table</h1>
+        <table id="spaceship_table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Affiliation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Use these samples if you need to distinguish between even and odd rows -->
+                <tr class="_s odd" title="Odd row">
+                    <td class="id">sample_id1</td>
+                    <td class="name">sample_name1</td>
+                    <td class="type">sample_type1</td>
+                    <td class="affiliation">sample_affiliation1</td>
+                </tr>
+                <tr class="_s even" title="Even row" style="background-color:grey;">
+                    <td class="id">sample_id2</td>
+                    <td class="name">sample_name2</td>
+                    <td class="type">sample_type2</td>
+                    <td class="affiliation">sample_affiliation2</td>
+                </tr>
+                <!-- Use this to highlight some special row -->
+                <tr class="_s odd highlight" title="Special" style="background-color:pink; font-weight:bold;">
+                    <td class="id">sample_id3</td>
+                    <td class="name">sample_name3</td>
+                    <td class="type">sample_type3</td>
+                    <td class="affiliation">sample_affiliation3</td>
+                </tr>
+                <!-- Use these if no distinction is required -->
+                <tr class="_s standard" title="Standard">
+                    <td class="id">sample_id4</td>
+                    <td class="name">sample_name4</td>
+                    <td class="type">sample_type4</td>
+                    <td class="affiliation">sample_affiliation4</td>
+                </tr>
+                <tr class="_s standard" title="Standard">
+                    <td class="id">sample_id5</td>
+                    <td class="name">sample_name5</td>
+                    <td class="type">sample_type5</td>
+                    <td class="affiliation">sample_affiliation5</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript" language="javascript" charset="utf-8" ></script>
+        <script src="http://code.jquery.com/qunit/git/qunit.js" type="text/javascript" language="javascript" charset="utf-8"></script>
+
+        <script src="../jquery.sampling.js"></script>
+        <script type="text/javascript" language="javascript" charset="utf-8">
+            var $samples, $row_sample, $rows;
+
+            $(document).ready(function() {
+                // Get data
+                var maps = [];
+                $.ajax({
+                    async: false,
+                    url:'data.json',
+                    dataType: 'json',
+                    success: function(data) {
+                        $.each(data, function(index, ship){
+                            maps.push({
+                                '.id':ship.id,
+                                '.name':ship.name,
+                                '.type':ship.type,
+                                '.affiliation':ship.affiliation
+                            });
+                        });
+                    }
+                });
+
+                function generateShips(index, limit) {
+                    if (index == limit) { return null; }
+
+                    function rnd(min, max) {
+                        return Math.floor(Math.random() * (max - min)) + min;
+                    }
+
+                    function generateName() {
+                        var l = rnd(3, 5);
+                        var alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                        var numbers = '0123456789';
+                        var name = alpha[rnd(0, alpha.length)] + '-';
+                        for (var i=0; i<l; i++) {
+                            name += numbers[rnd(0, numbers.length)];
+                        }
+                        return name;
+                    }
+
+                    if (rnd(0, 2)) { this.addClass('highlight'); }
+
+                    return {
+                        '.id':index,
+                        '.name':generateName(),
+                        '.type':['Starfighter', 'Imperial cruiser', 'Light freighter'][rnd(0, 3)],
+                        '.affiliation':['Galactic Empire', 'Rebel Alliance'][rnd(0, 2)]
+                    };
+                }
+
+                //1: Gather samples
+                $samples = $(document).sampling('gather');
+
+                //2: Select one example
+                $row_sample = $samples.sampling('select', '.standard');
+
+                //3: Customize it!
+                $rows = $row_sample.sampling('new', generateShips, {}, 10);
+
+                //4: Add to the document
+                $('#spaceship_table tbody').append($rows);
+            });
+        </script>
+    </body>
+</html>

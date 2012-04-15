@@ -1,32 +1,32 @@
 [
     {
-        id:1,
-        name:'Tie Fighter',
-        type:'Starfighter',
-        affiliation:'Galactic Empire'
+        "id":1,
+        "name":"Tie Fighter",
+        "type":"Starfighter",
+        "affiliation":"Galactic Empire"
     },
     {
-        id:2,
-        name:'X-Wing Fighter',
-        type:'Starfighter',
-        affiliation:'Rebel Alliance'
+        "id":2,
+        "name":"X-Wing Fighter",
+        "type":"Starfighter",
+        "affiliation":"Rebel Alliance"
     },
     {
-        id:3,
-        name:'Imperial Star Destroyer',
-        type:'Imperial cruiser',
-        affiliation:'Galactic Empire'
+        "id":3,
+        "name":"Imperial Star Destroyer",
+        "type":"Imperial cruiser",
+        "affiliation":"Galactic Empire"
     },
     {
-        id:4,
-        name:'Escape Pod',
-        type:'Life support',
-        affiliation:'Neutral'
+        "id":4,
+        "name":"Escape Pod",
+        "type":"Life support",
+        "affiliation":"Neutral"
     },
     {
-        id:5,
-        name:'Millenium Falcon',
-        type:'Light freighter',
-        affiliation:'Rebel Alliance'
+        "id":5,
+        "name":"Millenium Falcon",
+        "type":"Light freighter",
+        "affiliation":"Rebel Alliance"
     }
 ]
