@@ -112,13 +112,18 @@ var $rows = $row_sample.sampling('new', [
 $('#spaceship_table').append($rows);
 ```
 
+Documentation
+-------------
+
+* [Latest documentation](https://github.com/lodr/jquery.sampling/tree/master/docs/html)
+
 Features
 --------
- * Improve designer / programmer developing cycle:
-  * Frees the designer to know any template language
-  * Lets the programmer use designer's templates as sample libraries
- * Lets nested samples
- * Several ways to customize samples
+* Improve designer / programmer developing cycle:
+ * Frees the designer to know any template language
+ * Lets the programmer use designer's templates as sample libraries
+* Lets nested samples
+* Several ways to customize samples
 
 Examples
 --------
