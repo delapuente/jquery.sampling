@@ -28,6 +28,7 @@ echo "Restoring documentation"
 tar -vxf /tmp/$TAR_FILE
 
 echo "Commiting changes and pushing"
+touch .nojekyll
 git add .
 git commit -am "Documentaiton updated to $(date)"
 git push 
