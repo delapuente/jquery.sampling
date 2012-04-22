@@ -10,7 +10,9 @@ echo "Generating HTML documentation..."
 make html
 
 echo "Saving documentation"
-tar -vcf /tmp/$TAR_FILE build/html/*
+cd build/html
+tar -vcf /tmp/$TAR_FILE *
+cd ../..
 
 echo "Exiting sphinx source directory"
 cd ..
