@@ -20,7 +20,7 @@ git checkout gh-pages
 
 echo "Cleaning the directory..."
 git clean -dfx
-git rm -rf *
+git rm -rf --ignore-unmatch *
 
 echo "Restoring documentation"
 tar -xf /tmp/$TAR_FILE .
