@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 PROJECT=jquery.sampling
-TAR_FILE=$PROJECT"_docs_html$(date +s).tar"
+TAR_FILE=$PROJECT"_docs_html$(date +%s).tar"
 
 echo "Entering sphinx source directory"
 cd sphinx
@@ -10,7 +10,7 @@ echo "Generating HTML documentation..."
 make html
 
 echo "Saving documentation"
-tar -cf /tmp/$TAR_FILE build/html/*
+tar -cfv /tmp/$TAR_FILE build/html/*
 
 echo "Exiting sphinx source directory"
 cd ..
@@ -23,7 +23,7 @@ git clean -dfx
 git rm -rf --ignore-unmatch *
 
 echo "Restoring documentation"
-tar -xf /tmp/$TAR_FILE .
+tar -xvf /tmp/$TAR_FILE .
 
 echo "Commiting changes and pushing"
 git add .
