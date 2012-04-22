@@ -115,7 +115,7 @@ $('#spaceship_table').append($rows);
 Documentation
 -------------
 
-* [Latest documentation](https://github.com/lodr/jquery.sampling/tree/master/docs/html)
+* [Latest documentation](http://lodr.github.com/jquery.sampling/)
 
 Features
 --------
