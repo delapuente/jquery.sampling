@@ -25,7 +25,7 @@ git clean -dfx
 git rm -rf --ignore-unmatch *
 
 echo "Restoring documentation"
-tar -vxf /tmp/$TAR_FILE .
+tar -vxf /tmp/$TAR_FILE
 
 echo "Commiting changes and pushing"
 git add .
