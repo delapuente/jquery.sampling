@@ -19,6 +19,7 @@ echo "Switching to gh-pages branch"
 git checkout gh-pages
 
 echo "Cleaning the directory..."
+git clean -dfx
 git rm -rf *
 
 echo "Restoring documentation"
@@ -35,3 +36,4 @@ git checkout master
 echo "Done!"
 
 exit 0
+
