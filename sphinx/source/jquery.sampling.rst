@@ -113,6 +113,8 @@ In instance, look at this customizing item::
 
 Now look at this HTML snippet::
 
+.. code-block:: html
+
     <tr class="_s">
         <td class="id">sample_id1</td>
         <td class="name">sample_name1</td>

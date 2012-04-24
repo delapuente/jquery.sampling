@@ -31,7 +31,7 @@ echo "Commiting changes and pushing"
 touch .nojekyll
 git add .
 git commit -am "Documentaiton updated to $(date)"
-git push remote gh-pages 
+git push git@github.com:lodr/jquery.sampling.git gh-pages 
 
 echo "Switching to master branch"
 git checkout master
