@@ -111,7 +111,7 @@ In instance, look at this customizing item::
         '.affiliation':'Galactic Empire'
     }
 
-Now look at this HTML snippet::
+Now look at this HTML snippet:
 
 .. code-block:: html
 
@@ -122,7 +122,9 @@ Now look at this HTML snippet::
         <td class="affiliation">sample_affiliation1</td>
     </tr>
 
-Previous ``tr`` sample, after instantiating with the previous item should look like::
+Previous ``tr`` sample, after instantiating with the previous item should look like:
+
+.. code-block:: html
 
     <tr>
         <td class="id">1</td>
