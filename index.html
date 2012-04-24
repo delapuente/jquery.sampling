@@ -64,90 +64,95 @@
 <div class="section" id="designer">
 <h2>Designer<a class="headerlink" href="#designer" title="Permalink to this headline">¶</a></h2>
 <p>He decorates part of the HTML with <cite>_s</cite> (or something else) class:</p>
-<div class="highlight-python"><pre>&lt;h1&gt;Star Wars Spaceship Table&lt;/h1c&gt;
-&lt;table id="spaceship_table"&gt;
-    &lt;thead&gt;
-        &lt;tr&gt;
-            &lt;th&gt;Id&lt;/th&gt;
-            &lt;th&gt;Name&lt;/th&gt;
-            &lt;th&gt;Type&lt;/th&gt;
-            &lt;th&gt;Affiliation&lt;/th&gt;
-        &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-        &lt;!-- Use these samples if you need to distinguish between even and odd rows --&gt;
-        &lt;tr class="_s odd" title="Odd row"&gt;
-            &lt;td class="id"&gt;sample_id1&lt;/td&gt;
-            &lt;td class="name"&gt;sample_name1&lt;/td&gt;
-            &lt;td class="type"&gt;sample_type1&lt;/td&gt;
-            &lt;td class="affiliation"&gt;sample_affiliation1&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr class="_s even" title="Even row" style="background-color:grey;"&gt;
-            &lt;td class="id"&gt;sample_id2&lt;/td&gt;
-            &lt;td class="name"&gt;sample_name2&lt;/td&gt;
-            &lt;td class="type"&gt;sample_type2&lt;/td&gt;
-            &lt;td class="affiliation"&gt;sample_affiliation2&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;!-- Use this to highlight some special row --&gt;
-        &lt;tr class="_s odd highlight" title="Special" style="background-color:pink; font-weight:bold;"&gt;
-            &lt;td class="id"&gt;sample_id3&lt;/td&gt;
-            &lt;td class="name"&gt;sample_name3&lt;/td&gt;
-            &lt;td class="type"&gt;sample_type3&lt;/td&gt;
-            &lt;td class="affiliation"&gt;sample_affiliation3&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;!-- Use these if no distinction is required --&gt;
-        &lt;tr class="_s standard" title="Standard"&gt;
-            &lt;td class="id"&gt;sample_id4&lt;/td&gt;
-            &lt;td class="name"&gt;sample_name4&lt;/td&gt;
-            &lt;td class="type"&gt;sample_type4&lt;/td&gt;
-            &lt;td class="affiliation"&gt;sample_affiliation4&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr class="_s standard" title="Standard"&gt;
-            &lt;td class="id"&gt;sample_id5&lt;/td&gt;
-            &lt;td class="name"&gt;sample_name5&lt;/td&gt;
-            &lt;td class="type"&gt;sample_type5&lt;/td&gt;
-            &lt;td class="affiliation"&gt;sample_affiliation5&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/tbody&gt;
-&lt;/table&gt;</pre>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Star Wars Spaceship Table<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;table</span> <span class="na">id=</span><span class="s">&quot;spaceship_table&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;thead&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;th&gt;</span>Id<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;</span>Name<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;</span>Type<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;</span>Affiliation<span class="nt">&lt;/th&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;/thead&gt;</span>
+    <span class="nt">&lt;tbody&gt;</span>
+        <span class="c">&lt;!-- Use these samples if you need to distinguish between even and odd rows --&gt;</span>
+        <span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">&quot;_s odd&quot;</span> <span class="na">title=</span><span class="s">&quot;Odd row&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;id&quot;</span><span class="nt">&gt;</span>sample_id1<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>sample_name1<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;type&quot;</span><span class="nt">&gt;</span>sample_type1<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;affiliation&quot;</span><span class="nt">&gt;</span>sample_affiliation1<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">&quot;_s even&quot;</span> <span class="na">title=</span><span class="s">&quot;Even row&quot;</span> <span class="na">style=</span><span class="s">&quot;background-color:grey;&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;id&quot;</span><span class="nt">&gt;</span>sample_id2<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>sample_name2<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;type&quot;</span><span class="nt">&gt;</span>sample_type2<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;affiliation&quot;</span><span class="nt">&gt;</span>sample_affiliation2<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="c">&lt;!-- Use this to highlight some special row --&gt;</span>
+        <span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">&quot;_s odd highlight&quot;</span> <span class="na">title=</span><span class="s">&quot;Special&quot;</span> <span class="na">style=</span><span class="s">&quot;background-color:pink; font-weight:bold;&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;id&quot;</span><span class="nt">&gt;</span>sample_id3<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>sample_name3<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;type&quot;</span><span class="nt">&gt;</span>sample_type3<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;affiliation&quot;</span><span class="nt">&gt;</span>sample_affiliation3<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="c">&lt;!-- Use these if no distinction is required --&gt;</span>
+        <span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">&quot;_s standard&quot;</span> <span class="na">title=</span><span class="s">&quot;Standard&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;id&quot;</span><span class="nt">&gt;</span>sample_id4<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>sample_name4<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;type&quot;</span><span class="nt">&gt;</span>sample_type4<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;affiliation&quot;</span><span class="nt">&gt;</span>sample_affiliation4<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">&quot;_s standard&quot;</span> <span class="na">title=</span><span class="s">&quot;Standard&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;id&quot;</span><span class="nt">&gt;</span>sample_id5<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>sample_name5<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;type&quot;</span><span class="nt">&gt;</span>sample_type5<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;affiliation&quot;</span><span class="nt">&gt;</span>sample_affiliation5<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;/tbody&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="programmer">
 <h2>Programmer<a class="headerlink" href="#programmer" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p class="first">Gather samples:</p>
-<div class="highlight-python"><pre>var $samples = $(document).sampling('gather');</pre>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">$samples</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">sampling</span><span class="p">(</span><span class="s1">&#39;gather&#39;</span><span class="p">);</span>
+</pre></div>
 </div>
 </li>
 <li><p class="first">Select one example:</p>
-<div class="highlight-python"><pre>var $row_sample = $samples.sampling('select', '.standard');</pre>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">$row_sample</span> <span class="o">=</span> <span class="nx">$samples</span><span class="p">.</span><span class="nx">sampling</span><span class="p">(</span><span class="s1">&#39;select&#39;</span><span class="p">,</span> <span class="s1">&#39;.standard&#39;</span><span class="p">);</span>
+</pre></div>
 </div>
 </li>
 <li><p class="first">Customize and instanciate it:</p>
-<div class="highlight-python"><pre>var $rows = $row_sample.sampling('new', [
-    {
-        '.id':1,
-        '.name':'Tie Fighter',
-        '.type':'Starfighter',
-        '.affiliation':'Galactic Empire'
-    },
-    {
-        '.id':2,
-        '.name':'X-Wing Fighter',
-        '.type':'Starfighter',
-        '.affiliation':'Rebel Alliance'
-    },
-    {
-        '.id':3,
-        '.name':'Imperial Star Destroyer',
-        '.type':'Imperial cruiser',
-        '.affiliation':'Galactic Empire'
-    }
-]);</pre>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">$rows</span> <span class="o">=</span> <span class="nx">$row_sample</span><span class="p">.</span><span class="nx">sampling</span><span class="p">(</span><span class="s1">&#39;new&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;.id&#39;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s1">&#39;.name&#39;</span><span class="o">:</span><span class="s1">&#39;Tie Fighter&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;.type&#39;</span><span class="o">:</span><span class="s1">&#39;Starfighter&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;.affiliation&#39;</span><span class="o">:</span><span class="s1">&#39;Galactic Empire&#39;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;.id&#39;</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span>
+        <span class="s1">&#39;.name&#39;</span><span class="o">:</span><span class="s1">&#39;X-Wing Fighter&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;.type&#39;</span><span class="o">:</span><span class="s1">&#39;Starfighter&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;.affiliation&#39;</span><span class="o">:</span><span class="s1">&#39;Rebel Alliance&#39;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;.id&#39;</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span>
+        <span class="s1">&#39;.name&#39;</span><span class="o">:</span><span class="s1">&#39;Imperial Star Destroyer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;.type&#39;</span><span class="o">:</span><span class="s1">&#39;Imperial cruiser&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;.affiliation&#39;</span><span class="o">:</span><span class="s1">&#39;Galactic Empire&#39;</span>
+    <span class="p">}</span>
+<span class="p">]);</span>
+</pre></div>
 </div>
 </li>
 <li><p class="first">Append to the table:</p>
-<div class="highlight-python"><pre>$('#spaceship_table').append($rows);</pre>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#spaceship_table&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">$rows</span><span class="p">);</span>
+</pre></div>
 </div>
 </li>
 </ol>

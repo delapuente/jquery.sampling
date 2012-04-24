@@ -30,9 +30,11 @@ This plugin enhances the coordination among designers and programmers. Look at t
 Designer
 --------
 
-He decorates part of the HTML with `_s` (or something else) class::
+He decorates part of the HTML with `_s` (or something else) class:
 
-    <h1>Star Wars Spaceship Table</h1c>
+.. code-block:: html
+
+    <h1>Star Wars Spaceship Table</h1>
     <table id="spaceship_table">
         <thead>
             <tr>
@@ -81,6 +83,8 @@ He decorates part of the HTML with `_s` (or something else) class::
 
 Programmer
 ----------
+
+.. highlight:: javascript
 
 1. Gather samples::
 
