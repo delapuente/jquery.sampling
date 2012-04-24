@@ -1,3 +1,5 @@
+.. highlight:: javascript
+
 jQuery.sampling plugin
 ======================
 

@@ -3,6 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+Download
+========
+
+First release is not still available but you can get the current RC from our `github repository <https://github.com/lodr/jquery.sampling>`_
+
 Welcome to jQuery.sampling()'s documentation!
 =============================================
 
