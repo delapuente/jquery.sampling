@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Download &mdash; jQuery.sampling() 1.0.0-rc.3 documentation</title>
+    <title>Welcome to jQuery.sampling()’s documentation! &mdash; jQuery.sampling() 1.0.0-rc.3 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -47,13 +47,15 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="download">
-<h1>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h1>
-<p>First release is not still available but you can get the current RC from our <a class="reference external" href="https://github.com/lodr/jquery.sampling">github repository</a></p>
-</div>
-<div class="section" id="welcome-to-jquery-sampling-s-documentation">
+  <div class="section" id="welcome-to-jquery-sampling-s-documentation">
 <h1>Welcome to jQuery.sampling()&#8217;s documentation!<a class="headerlink" href="#welcome-to-jquery-sampling-s-documentation" title="Permalink to this headline">¶</a></h1>
 <p>jQuery.sampling() is a <a class="reference external" href="http://jquery.com/">jQuery</a> plugin for HTML Sampling / Template Animation.</p>
+<div class="section" id="download">
+<h2>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
+<p>First release is not still available but you can get the current RC from our <a class="reference external" href="https://github.com/lodr/jquery.sampling">github repository</a></p>
+</div>
+<div class="section" id="what-is-jquery-sampling">
+<h2>What is jQuery.sampling()<a class="headerlink" href="#what-is-jquery-sampling" title="Permalink to this headline">¶</a></h2>
 <p>According to Iain Dooley from <a class="reference external" href="http://www.workingsoftware.com.au">http://www.workingsoftware.com.au</a></p>
 <blockquote class="epigraph">
 <div>Template animation: the practice of using static HTML files as a resource from within your application to be manipulated via the DOM to generate dynamic output.</div></blockquote>
@@ -62,7 +64,7 @@
 <p>The original concept assumes you will use HTML Sampling / Template animation in the backend but I find useful to have some library in the frontend as well.</p>
 <p>This plugin enhances the coordination among designers and programmers. Look at this awesome interaction!</p>
 <div class="section" id="designer">
-<h2>Designer<a class="headerlink" href="#designer" title="Permalink to this headline">¶</a></h2>
+<h3>Designer<a class="headerlink" href="#designer" title="Permalink to this headline">¶</a></h3>
 <p>He decorates part of the HTML with <cite>_s</cite> (or something else) class:</p>
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Star Wars Spaceship Table<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;table</span> <span class="na">id=</span><span class="s">&quot;spaceship_table&quot;</span><span class="nt">&gt;</span>
@@ -114,7 +116,7 @@
 </div>
 </div>
 <div class="section" id="programmer">
-<h2>Programmer<a class="headerlink" href="#programmer" title="Permalink to this headline">¶</a></h2>
+<h3>Programmer<a class="headerlink" href="#programmer" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p class="first">Gather samples:</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">$samples</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">sampling</span><span class="p">(</span><span class="s1">&#39;gather&#39;</span><span class="p">);</span>
@@ -158,6 +160,7 @@
 </ol>
 </div>
 </div>
+</div>
 <div class="section" id="features">
 <h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
 <blockquote>
@@ -166,21 +169,25 @@
 </ul>
 <blockquote>
 <div><ul class="simple">
-<li>Frees the designer to know any template language</li>
+<li><strong>Frees the designer to know any template language</strong></li>
 <li>Lets the programmer use designer&#8217;s templates as sample libraries</li>
 </ul>
 </div></blockquote>
 <ul class="simple">
 <li>Lets nested samples</li>
 <li>Several ways to customize samples</li>
+<li>Client side includes (CSI)</li>
 </ul>
 </div></blockquote>
-<p>Contents:</p>
+</div>
+<div class="section" id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="jquery.sampling.html">jQuery.sampling plugin</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="jquery.sampling.html#setup">Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jquery.sampling.html#plugin-api">Plugin API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jquery.sampling.html#templating-capabilities">Templating capabilities</a></li>
 </ul>
 </li>
 </ul>
@@ -203,13 +210,17 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Download</a></li>
-<li><a class="reference internal" href="#welcome-to-jquery-sampling-s-documentation">Welcome to jQuery.sampling()&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#">Welcome to jQuery.sampling()&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#download">Download</a></li>
+<li><a class="reference internal" href="#what-is-jquery-sampling">What is jQuery.sampling()</a><ul>
 <li><a class="reference internal" href="#designer">Designer</a></li>
 <li><a class="reference internal" href="#programmer">Programmer</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#features">Features</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#contents">Contents</a><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>

@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="jQuery.sampling() 1.0.0-rc.3 documentation" href="index.html" />
-    <link rel="prev" title="Download" href="index.html" /> 
+    <link rel="prev" title="Welcome to jQuery.sampling()’s documentation!" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -36,7 +36,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="index.html" title="Download"
+          <a href="index.html" title="Welcome to jQuery.sampling()’s documentation!"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">jQuery.sampling() 1.0.0-rc.3 documentation</a> &raquo;</li> 
       </ul>
@@ -49,6 +49,7 @@
             
   <div class="section" id="jquery-sampling-plugin">
 <h1>jQuery.sampling plugin<a class="headerlink" href="#jquery-sampling-plugin" title="Permalink to this headline">¶</a></h1>
+<p>jQuery.sampling exposes several functionallities. Main functions are related with <strong>template animation</strong> / <strong>sampling</strong> but it also includes <strong>templating related capabilities</strong> explained in <a class="reference internal" href="#templating-capabilities"><em>Templating capabilities</em></a>.</p>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <p>You can configure the jQuery.sampling() plugin by calling <a class="reference internal" href="#jQuery.sampling" title="jQuery.sampling"><tt class="xref js js-func docutils literal"><span class="pre">jQuery.sampling()</span></tt></a> on the jQuery object (on <tt class="docutils literal"><span class="pre">$</span></tt> for newbies).</p>
@@ -84,6 +85,8 @@
 <dl class="docutils">
 <dt>sampleClass (defaults to <tt class="docutils literal"><span class="pre">_s</span></tt>)</dt>
 <dd>class to mark HTML elements as samples. These elements will be gathered by using <a class="reference internal" href="#gather" title="gather"><tt class="xref js js-func docutils literal"><span class="pre">gather()</span></tt></a>.</dd>
+<dt>includeClass (defaults to <tt class="docutils literal"><span class="pre">_inc</span></tt>)</dt>
+<dd>class to mark A elements to be used as place holders for client side includes when calling <a class="reference internal" href="#include" title="include"><tt class="xref js js-func docutils literal"><span class="pre">include()</span></tt></a>.</dd>
 <dt>defaultFlags</dt>
 <dd>see <a class="reference internal" href="#instantiation-flags"><em>Instantiation flags</em></a> for more information about these options.</dd>
 </dl>
@@ -258,7 +261,11 @@
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a jQuery object, clone of the current sample, without the sample class.</p>
+<tr class="field-even field"><th class="field-name" colspan="2">Throws Returned values of the map generator or objects inside the array should be customizing items:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first">if <tt class="docutils literal"><span class="pre">map_generator</span></tt> does not return customizing items.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a jQuery object, clone of the current sample, without the sample class.</p>
 </td>
 </tr>
 </tbody>
@@ -290,15 +297,49 @@
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a jQuery object, clone of the current sample, without the sample class.</p>
+<tr class="field-even field"><th class="field-name" colspan="2">Throws Returned values of the map generator or objects inside the array should be customizing items:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first">if items in <tt class="docutils literal"><span class="pre">customizing_array</span></tt> are not customizing items.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a jQuery object, clone of the current sample, without the sample class.</p>
 </td>
 </tr>
 </tbody>
 </table>
-<div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">If you want to pass an array of just one item, and this item is not a function, then ignores the array and pass only the item.</p>
+</dd></dl>
+
 </div>
+</div>
+<div class="section" id="templating-capabilities">
+<span id="id3"></span><h2>Templating capabilities<a class="headerlink" href="#templating-capabilities" title="Permalink to this headline">¶</a></h2>
+<p>By the moment only CSI (<strong>client side includes</strong>) are supported but other features are planned to be integrated soon.</p>
+<div class="section" id="client-side-includes">
+<h3>Client side includes<a class="headerlink" href="#client-side-includes" title="Permalink to this headline">¶</a></h3>
+<p>jQuery.sampling() includes a mechanism to perform <em>client side includes</em> (CSI). These includes act like traditional server side includes of languages such as PHP but in the client side. In few words, they are elements pointing some URL, jQuery.sampling() is able to replace these elements with the contents of URL they are pointing to.</p>
+<p>To perform a client side include, use <strong>CSI place holders</strong>. These are anchor elements <tt class="docutils literal"><span class="pre">&lt;a&gt;</span></tt> with the include class (by default <tt class="docutils literal"><span class="pre">_inc</span></tt>, see <a class="reference internal" href="#plugin-options"><em>jQuery.sampling() options</em></a>) and <tt class="docutils literal"><span class="pre">href</span></tt> attribute pointing to an URL, source of the include:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;_inc&quot;</span> <span class="na">href=</span><span class="s">&quot;./menu.html&quot;</span><span class="nt">&gt;</span>This will be replaced by contents of menu.html<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+</div>
+<p>Use the following code to perform CSI on the page on document ready:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">sampling</span><span class="p">(</span><span class="s1">&#39;include&#39;</span><span class="p">);</span> <span class="p">});</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="include">
+<tt class="descname">include</tt><big>(</big><span class="optional">[</span><em>limit=0</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#include" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces CSI place holders by the contents referred by them. Note that you can perform CSI replacements contained by a jQuery object by calling <a class="reference internal" href="#include" title="include"><tt class="xref js js-func docutils literal"><span class="pre">include()</span></tt></a> from that object.</p>
+<p>Note how new content can include more CSI place holders. By default, they will be resolved too but the developer can limitate the bahaviour by passing a non-zero value as parameter <tt class="docutils literal"><span class="pre">limit</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>limit</strong> &#8211; in case of the new content is containing CSI place holders, the parameter indicates how many times the CSI process will be performed. I.e. a value of 1 indicates only one level of CSI is performed so after resolving CSI place holders for the first time, no further replacements will be done. A value of 0 means to resolve all CSI place holders.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -324,13 +365,17 @@
 <li><a class="reference internal" href="#customizing-items">Customizing items</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#templating-capabilities">Templating capabilities</a><ul>
+<li><a class="reference internal" href="#client-side-includes">Client side includes</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
-                        title="previous chapter">Download</a></p>
+                        title="previous chapter">Welcome to jQuery.sampling()&#8217;s documentation!</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/jquery.sampling.txt"
@@ -360,7 +405,7 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="index.html" title="Download"
+          <a href="index.html" title="Welcome to jQuery.sampling()’s documentation!"
              >previous</a> |</li>
         <li><a href="index.html">jQuery.sampling() 1.0.0-rc.3 documentation</a> &raquo;</li> 
       </ul>

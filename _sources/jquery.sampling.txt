@@ -3,6 +3,8 @@
 jQuery.sampling plugin
 ======================
 
+jQuery.sampling exposes several functionallities. Main functions are related with **template animation** / **sampling** but it also includes **templating related capabilities** explained in :js:ref:`templating-capabilities`.
+
 Setup
 -----
 
@@ -30,6 +32,9 @@ jQuery.sampling() options
 
 sampleClass (defaults to ``_s``)
     class to mark HTML elements as samples. These elements will be gathered by using :js:func:`gather`.
+
+includeClass (defaults to ``_inc``)
+    class to mark A elements to be used as place holders for client side includes when calling :js:func:`include`.
 
 defaultFlags
     see :ref:`instantiation-flags` for more information about these options.
@@ -163,6 +168,7 @@ Following, there is the documentation about the different ways of calling :js:fu
     :param object flags:
         flags to customize the sample's instantiaion. Default flags can be set by using :js:func:`jQuery.sampling` or :js:func:`option`. Flags are explained in :ref:`instantiation-flags`.
     :param mixed ...: parameters for the ``map_generator``.
+    :throws Returned values of the map generator or objects inside the array should be customizing items: if ``map_generator`` does not return customizing items.
     :returns: a jQuery object, clone of the current sample, without the sample class.
 
 .. js:function:: new(customizing_array[, flags={}[, ...]])
@@ -183,8 +189,35 @@ Following, there is the documentation about the different ways of calling :js:fu
     :param object flags:
         flags to customize the sample's instantiaion. Default flags can be set by using :js:func:`jQuery.sampling` or :js:func:`option`. Flags are explained in :ref:`instantiation-flags`.
     :param mixed ...: parameters for the ``map_generator``.
+    :throws Returned values of the map generator or objects inside the array should be customizing items: if items in ``customizing_array`` are not customizing items.
     :returns: a jQuery object, clone of the current sample, without the sample class.
 
-    .. TIP::
-        If you want to pass an array of just one item, and this item is not a function, then ignores the array and pass only the item.
+.. _templating-capabilities:
 
+Templating capabilities
+-----------------------
+
+By the moment only CSI (**client side includes**) are supported but other features are planned to be integrated soon.
+
+Client side includes
+^^^^^^^^^^^^^^^^^^^^
+
+jQuery.sampling() includes a mechanism to perform *client side includes* (CSI). These includes act like traditional server side includes of languages such as PHP but in the client side. In few words, they are elements pointing some URL, jQuery.sampling() is able to replace these elements with the contents of URL they are pointing to.
+
+To perform a client side include, use **CSI place holders**. These are anchor elements ``<a>`` with the include class (by default ``_inc``, see :js:ref:`plugin-options`) and ``href`` attribute pointing to an URL, source of the include:
+
+.. code-block:: html
+
+    <a class="_inc" href="./menu.html">This will be replaced by contents of menu.html</a>
+
+Use the following code to perform CSI on the page on document ready::
+
+    $(function() { $(document).sampling('include'); });
+
+.. js:function:: include([limit=0])
+
+    Replaces CSI place holders by the contents referred by them. Note that you can perform CSI replacements contained by a jQuery object by calling :js:func:`include` from that object.
+
+    Note how new content can include more CSI place holders. By default, they will be resolved too but the developer can limitate the bahaviour by passing a non-zero value as parameter ``limit``.
+
+    :param limit: in case of the new content is containing CSI place holders, the parameter indicates how many times the CSI process will be performed. I.e. a value of 1 indicates only one level of CSI is performed so after resolving CSI place holders for the first time, no further replacements will be done. A value of 0 means to resolve all CSI place holders.
