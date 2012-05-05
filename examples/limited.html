@@ -2,24 +2,33 @@
 <html>
     <head>
         <title>jQuery Sampling: designer/programmer cooperation tool</title>
+
+        <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript" language="javascript" charset="utf-8" ></script>
+
+        <script src="../jquery.sampling.js"></script>
+        <script type="text/javascript" language="javascript" charset="utf-8">
+             $(document).ready(function() {
+                $(document).sampling('include', 1);
+
+                $('#first').click(function() {
+                    $('#firstSection').sampling('include');
+                });
+                $('#second').click(function() {
+                    $('#secondSection').sampling('include');
+                });
+                $('#all').click(function() {
+                    $(document).sampling('include');
+                });
+            });
+        </script>
+
     </head>
     <body>
         <p>Only including one level...</p>
         <a class="_inc" href="./include_contents.html">This will be replaced by contents of include_contents.html</a>
 
-        <button id="includeButton">Press to perform the rest of includes</button>
-
-        <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript" language="javascript" charset="utf-8" ></script>
-        <script src="http://code.jquery.com/qunit/git/qunit.js" type="text/javascript" language="javascript" charset="utf-8"></script>
-
-        <script src="../jquery.sampling.js"></script>
-        <script type="text/javascript" language="javascript" charset="utf-8">
-             $(function() {
-                $(document).sampling('include', 1);
-                $('#includeButton').click(function() {
-                    $(document).sampling('include');
-                });
-            });
-        </script>
+        <button id="first">Press to resolve first section includes</button>
+        <button id="second">Press to resolve second section includes</button>
+        <button id="all">Press to perform all the includes</button>
     </body>
 </html>

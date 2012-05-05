@@ -35,6 +35,24 @@ tbody tr:last-child td:last-child {
     background-color:#eee;
 }
 
+.red td {
+    background-color:red;
+    color:white;
+    font-weight:bold;
+}
+
+.green td {
+    background-color:green;
+    color:white;
+    font-weight:bold;
+}
+
+.blue td {
+    background-color:blue;
+    color:white;
+    font-weight:bold;
+}
+
 .highlight {
     color:#ddd;
     text-shadow:#888 1px 1px;

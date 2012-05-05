@@ -13,6 +13,64 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     var settings;
     var cache = {};
 
+    // Default map generator that returns each item of an array
+    function getArrayIterator(array) {
+        var l = array.length;
+        return function(index) {
+            if (index == l) {
+                return null;
+            }
+            return array[index];
+        };
+    }
+
+    function getFixedIndexSelector(fixedIndex) {
+        return function(index, length) {
+            if (fixedIndex >= 0) {
+                return fixedIndex;
+            } else {
+                return length + fixedIndex;
+            }
+        }
+    }
+
+    function rotationSelectMode(index, length) {
+            return index % length;
+    }
+
+    // Default sample iteration functions
+    var defaultSelectors = {
+        'single':function() {
+            return 0;
+        },
+        'identity':function(index, length) {
+            if (index < length) {
+                return index
+            } else {
+                return null;
+            }
+        },
+        'clamp':function(index, length) {
+            if (index < length) {
+                return index;
+            } else {
+                return length - 1;
+            }
+        },
+        'altern': rotationSelectMode,
+        'rotation': rotationSelectMode,
+        'bounce':function(index, length) {
+            var tl = 2*length - 2;
+            var j = index % tl;
+            if (j < length) {
+                return j;
+            } else {
+                return tl - j;
+            }
+        },
+        'none' : function() { return null; }
+    };
+
     function _fill($collection, content, flags) {
         if (flags.ensureText) {
             $collection.text(content);
@@ -32,7 +90,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                 includeClass: '_inc',
                 defaultFlags: {
                     ensureText:false,
-                    clearSamples:true
+                    clearSamples:true,
+                    sampleSelectMode:0
                 }
             }, options || {});
 
@@ -44,7 +103,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
          */
         select: function(selector, noCache) {
             if (!noCache && typeof cache[selector] == 'undefined') {
-                cache[selector] = $($(selector, this)[0]);
+                cache[selector] = $(selector, this);
             }
             return cache[selector];
         },
@@ -67,9 +126,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
          * Resolve the client side includes
          */
         include: function(limit) {
+            var count = 0;
             var level = 0;
             var $anchors = $('a.'+settings.includeClass, this);
             while($anchors.length && (!limit || (limit && level < limit))) {
+                count += $anchors.length;
                 for (var i=0; i<$anchors.length; i++) {
                     var $anchor = $($anchors[i]);
                     $.ajax({
@@ -78,12 +139,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                         dataType:'html',
                         success: function(html) {
                             $anchor.replaceWith(html);
+                        },
+                        error: function() {
+                            count--;
                         }
                     });
                 }
-                $anchors = $('a.'+settings.includeClass);
+                $anchors = $('a.'+settings.includeClass, this);
                 level++;
             }
+            return count;
         },
 
         /*
@@ -96,17 +161,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             // Extend flags
             flags = $.extend({}, settings.defaultFlags, flags || {});
 
-            // Default map generator that returns each item of an array
-            function getArrayIterator(array) {
-                var l = array.length;
-                return function(index) {
-                    if (index == l) {
-                        return null;
-                    }
-                    return array[index];
-                };
-            }
-
             // Normalize arguments: the first argument should be a generator of
             // map objects
             if (typeof mapGenerator != 'function') {
@@ -117,40 +171,66 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                 mapGenerator = getArrayIterator(mapArray);
             }
 
+            // Select the sample selector
+            var sampleSelector;
+            if (typeof flags.sampleSelectMode == 'string') {
+                sampleSelector = defaultSelectors[flags.sampleSelectMode];
+                if (typeof sampleSelector == 'undefined') {
+                    throw "Sample mode '"+flags.sampleSelectMode+"' does not exist.";
+                }
+
+            } else if (typeof flags.sampleSelectMode == 'number') {
+                sampleSelector = getFixedIndexSelector(flags.sampleSelectMode);
+
+            } else if (typeof flags.sampleSelectMode == 'function') {
+                sampleSelector = flags.sampleSelectMode;
+
+            } else {
+                throw "sampleSelectMode flag must be a function or a string.";
+            }
+
             var result = [];
+
             var index = 0;
-            var $n = this.clone();
-            var args = Array.prototype.slice.call(arguments, 2);
-            args.splice(0, 0, index);
+            var selected = sampleSelector.call(this, index, this.length);
+            if (selected != null) {
 
-            while (null !== (m = mapGenerator.apply($n, args))) {
+                var $n = $(this[selected]).clone();
+                var args = Array.prototype.slice.call(arguments, 2);
+                args.splice(0, 0, index);
 
-                // Function: call and use the result as the actual map
-                if (typeof m == 'function') {
-                    args.splice(0, 0, index); // Add the current index to the callback
-                    m = m.apply($n, args);
+                while (null !== (m = mapGenerator.apply($n, args))) {
+
+                    // Function: call and use the result as the actual map
+                    if (typeof m == 'function') {
+                        args.splice(0, 0, index); // Add the current index to the callback
+                        m = m.apply($n, args);
+                    }
+
+                    if (typeof m != 'object') {
+                        throw 'Returned values of the map generator or objects inside the array should be customizing items.';
+                    }
+
+                    $.each(m, function(selector, content) {
+                        _fill($(selector, $n), content, flags)
+                    });
+
+                    // Remove sample class and all sample sub elements if required
+                    $n.removeClass(settings.sampleClass);
+                    if (flags.clearSamples) {
+                        $('.'+settings.sampleClass, $n).remove();
+                    }
+
+                    Array.prototype.push.apply(result, $n);
+
+                    // Next step
+                    index++;
+                    selected = sampleSelector(index, this.length);
+                    if (selected == null) { break; }
+
+                    $n = $(this[selected]).clone();
+                    args[0] = index;
                 }
-
-                if (typeof m != 'object') {
-                    throw 'Returned values of the map generator or objects inside the array should be customizing items.';
-                }
-
-                $.each(m, function(selector, content) {
-                    _fill($(selector, $n), content, flags)
-                });
-
-                // Remove sample class and all sample sub elements if required
-                $n.removeClass(settings.sampleClass);
-                if (flags.clearSamples) {
-                    $('.'+settings.sampleClass, $n).remove();
-                }
-
-                Array.prototype.push.apply(result, $n);
-
-                // Next step
-                index++;
-                $n = this.clone();
-                args[0] = index;
             }
             return $(result);
         },

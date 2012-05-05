@@ -1,6 +1,6 @@
 {
     "name": "jquery.sampling",
-    "version": "1.0.0-rc.3",
+    "version": "1.0.0",
     "title": "jQuery.sampling()",
     "author": {
         "name": "Salvador de la Puente González",
@@ -15,15 +15,17 @@
     "dependencies": {
         "jquery": ">=1.0.0"
     },
-    "description": "jQuery.sampling() is a jQuery plugin for HTML Sampling / Template Animation (http://www.workingsoftware.com.au/page/Your_templating_engine_sucks_and_everything_you_have_ever_written_is_spaghetti_code_yes_you)",
+    "description": "jQuery.sampling() is a jQuery plugin for HTML Sampling / Template Animation (http://www.workingsoftware.com.au/page/Your_templating_engine_sucks_and_everything_you_have_ever_written_is_spaghetti_code_yes_you) with support for client side includes.",
     "keywords": [
+        "CSI",
+        "client-side-includes",
         "template animation",
         "sampling",
         "template",
         "design cycle"
     ],
-    "homepage": "http://unoyunodiez.com/proyectos/jquery-sampling/",
-    "docs":"https://github.com/lodr/jquery.sampling",
+    "homepage": "http://lodr.github.com/jquery.sampling",
+    "docs":"http://lodr.github.com/jquery.sampling",
     "demo":"https://github.com/lodr/jquery.sampling/tree/master/examples",
     "maintainers": [
         {
@@ -33,5 +35,6 @@
     ],
     "files": [
         "jquery.sampling.js",
+        "jquery.sampling.min.js",
     ]
 }

@@ -37,14 +37,14 @@ He decorates part of the HTML with `_s` (or something else) class:
             <td class="type">sample_type1</td>
             <td class="affiliation">sample_affiliation1</td>
         </tr>
-        <tr class="_s even" title="Even row" style="background-color:grey;">
+        <tr class="_s even" title="Even row">
             <td class="id">sample_id2</td>
             <td class="name">sample_name2</td>
             <td class="type">sample_type2</td>
             <td class="affiliation">sample_affiliation2</td>
         </tr>
         <!-- Use this to highlight some special row -->
-        <tr class="_s odd highlight" title="Special" style="background-color:pink; font-weight:bold;">
+        <tr class="_s odd highlight" title="Special">
             <td class="id">sample_id3</td>
             <td class="name">sample_name3</td>
             <td class="type">sample_type3</td>
@@ -132,23 +132,34 @@ The [examples](https://github.com/lodr/jquery.sampling/blob/master/examples) dir
 
 * [simple.html](https://github.com/lodr/jquery.sampling/blob/master/examples/simple.html) shows the interaction described above.
 * [json.html](https://github.com/lodr/jquery.sampling/blob/master/examples/json.html) gets data from a json source.
-* [oddEven.html](https://github.com/lodr/jquery.sampling/blob/master/examples/oddEven.html) uses several samples.
-* [generator.html](https://github.com/lodr/jquery.sampling/blob/master/examples/simple.html) uses a generation funciton instead of an array.
+* [oddEven.html](https://github.com/lodr/jquery.sampling/blob/master/examples/oddEven.html) uses several sample select modes to generate even, odd rows.
+* [sampleModes.html](https://github.com/lodr/jquery.sampling/blob/master/examples/oddEven.html) shows predefined sample select modes in action.
+* [generator.html](https://github.com/lodr/jquery.sampling/blob/master/examples/simple.html) uses a generation function instead of an array.
+* [include.html](https://github.com/lodr/jquery.sampling/blob/master/examples/include.html) shows client side includes in action.
+* [limited.html](https://github.com/lodr/jquery.sampling/blob/master/examples/include.html) shows client side includes with limitation.
 
 Changelog
 ---------
 
+### 1.0.0
+
+* Support for **client side includes** and templating capabilities (see *include.html* and *limited.html* samples).
+* New **sample select modes** eases instantiation (see the *new oddEven.html* sample)
+* Improved documentation
+* More examples!
+
+
 ### 1.0.0-rc.2
 
-Documentation added
+* Documentation added
 
 ### 1.0.0-rc.1
 
-First release candidate.
+* First release candidate.
 
 ### 1.0.0-alpha.3
 
-API changed to be more homogeneus:
+* API changed to be more homogeneus:
 
 ```javascript
 // former $row_sample = $samples.sampling(selector) changes to:
@@ -157,7 +168,7 @@ $row_sample = $samples.sampling('select', selector);
 
 ### 1.0.0-alpha.1
 
-Initial commit
+* Initial commit
 
 Misc
 ----
