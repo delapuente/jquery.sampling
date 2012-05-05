@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>jQuery.sampling plugin &mdash; jQuery.sampling() 1.0.0-rc.3 documentation</title>
+    <title>jQuery.sampling plugin &mdash; jQuery.sampling() 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '1.0.0-rc.3',
+        VERSION:     '1.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="jQuery.sampling() 1.0.0-rc.3 documentation" href="index.html" />
+    <link rel="top" title="jQuery.sampling() 1.0.0 documentation" href="index.html" />
     <link rel="prev" title="Welcome to jQuery.sampling()’s documentation!" href="index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="index.html" title="Welcome to jQuery.sampling()’s documentation!"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">jQuery.sampling() 1.0.0-rc.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">jQuery.sampling() 1.0.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -65,9 +65,11 @@
 <li><strong>options</strong> (<em>object</em>) &#8211; <p>a configuring object which defaults to:</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
     <span class="nx">sampleClass</span><span class="o">:</span> <span class="s1">&#39;_s&#39;</span><span class="p">,</span>
+    <span class="nx">includeClass</span><span class="o">:</span> <span class="s1">&#39;_inc&#39;</span><span class="p">,</span>
     <span class="nx">defaultFlags</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">ensureText</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span>
-        <span class="nx">clearSamples</span><span class="o">:</span><span class="kc">true</span>
+        <span class="nx">clearSamples</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
+        <span class="nx">sampleSelectMode</span><span class="o">:</span><span class="s1">&#39;single&#39;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -98,6 +100,8 @@
 <dd>during instantiation, content is set to each element by using <tt class="docutils literal"><span class="pre">jQuery.text()</span></tt> instead of <tt class="docutils literal"><span class="pre">jQuery.html()</span></tt> as it&#8217;s by default.</dd>
 <dt>clearSamples (defaults to <tt class="docutils literal"><span class="pre">true</span></tt>)</dt>
 <dd>this option removes all nested samples inside the sample being instantiated.</dd>
+<dt>sampleSelectMode (defaults to <tt class="docutils literal"><span class="pre">'single'</span></tt>)</dt>
+<dd>the option sets selection mode of samples when instantiating (see <a class="reference internal" href="#instantiating-samples"><em>Instantiating samples</em></a>)</dd>
 </dl>
 </div>
 </div>
@@ -128,7 +132,7 @@
 <dl class="function">
 <dt id="select">
 <tt class="descname">select</tt><big>(</big><em>selector</em><span class="optional">[</span>, <em>noCache=false</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#select" title="Permalink to this definition">¶</a></dt>
-<dd><p>Applies on <strong>sample collection</strong> returned by <a class="reference internal" href="#gather" title="gather"><tt class="xref js js-func docutils literal"><span class="pre">gather()</span></tt></a>. Selects the proper sample inside the sample collection. The method is cached by the selector so succesive calls to this method have improved performance.</p>
+<dd><p>Applies on <strong>sample collection</strong> returned by <a class="reference internal" href="#gather" title="gather"><tt class="xref js js-func docutils literal"><span class="pre">gather()</span></tt></a>. Selects the proper samples inside the sample collection. The method is cached by the selector so succesive calls to this method have improved performance.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -139,11 +143,15 @@
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a <strong>jQuery sample object</strong> with the sample. Avoid to modify this object because it&#8217;s the sample itself. Use <tt class="docutils literal"><span class="pre">jQuery.clone()</span></tt> or use <a class="reference internal" href="#new" title="new"><tt class="xref js js-func docutils literal"><span class="pre">new()</span></tt></a> to build a new copy.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a <strong>jQuery sample object</strong> with the sample(s). Avoid to modify this object because it&#8217;s the sample itself. Use <tt class="docutils literal"><span class="pre">jQuery.clone()</span></tt> or use <a class="reference internal" href="#new" title="new"><tt class="xref js js-func docutils literal"><span class="pre">new()</span></tt></a> to build a new copy.</p>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can select more than one sample. It is specially useful in combination with <a class="reference internal" href="#sample-select-modes"><em>Sample Select Mode</em></a>.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -185,12 +193,12 @@
 </dd></dl>
 
 <div class="section" id="instantiating-samples">
-<h3>Instantiating samples<a class="headerlink" href="#instantiating-samples" title="Permalink to this headline">¶</a></h3>
+<span id="id2"></span><h3>Instantiating samples<a class="headerlink" href="#instantiating-samples" title="Permalink to this headline">¶</a></h3>
 <p>Sample instantiation is the most interesting part of the plugin. Instantiate refers to clone the sample and customize it.</p>
-<p>The task can be performed by calling to <a class="reference internal" href="#new" title="new"><tt class="xref js js-func docutils literal"><span class="pre">new()</span></tt></a> in several ways. The most important concept here is <strong>customizing item</strong>.</p>
+<p>The task can be performed by calling to <a class="reference internal" href="#new" title="new"><tt class="xref js js-func docutils literal"><span class="pre">new()</span></tt></a> in several ways. The most important concept here is <strong>customizing item</strong> and <strong>sample selection mode</strong>.</p>
 </div>
 <div class="section" id="customizing-items">
-<span id="id2"></span><h3>Customizing items<a class="headerlink" href="#customizing-items" title="Permalink to this headline">¶</a></h3>
+<span id="id3"></span><h3>Customizing items<a class="headerlink" href="#customizing-items" title="Permalink to this headline">¶</a></h3>
 <p>When a sample is instantiated it is customized by a <strong>customizing item</strong>. This is an ordinary object where keys are valid jQuery selector strings and values are mixed contents.</p>
 <p>During customization process, each <tt class="docutils literal"><span class="pre">key</span></tt> of the customizing item is searched inside the sample and its content is set with the <tt class="docutils literal"><span class="pre">value</span></tt>.</p>
 <p>In instance, look at this customizing item:</p>
@@ -220,6 +228,31 @@
 <span class="nt">&lt;/tr&gt;</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="sample-select-mode">
+<span id="sample-select-modes"></span><h3>Sample Select Mode<a class="headerlink" href="#sample-select-mode" title="Permalink to this headline">¶</a></h3>
+<p>When you select more than one sample by using <a class="reference internal" href="#select" title="select"><tt class="xref js js-func docutils literal"><span class="pre">select()</span></tt></a> you can specify which specific sample will be selected to be customized by the next customization item. This can be done by setting the instantiaion flag <tt class="docutils literal"><span class="pre">sampleSelectMode</span></tt>.</p>
+<p>If the <strong>flag is set with a function</strong>, then the function&#8217;s signature should be as follows:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">sampleSelector</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">length</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Inside the function, <tt class="docutils literal"><span class="pre">this</span></tt> is the sample collection. Parameter <tt class="docutils literal"><span class="pre">index</span></tt> is actually the call count for the function (first time, 0; second time, 1; etc) and <tt class="docutils literal"><span class="pre">length</span></tt> is the length of the sample collection. Return value must be an integer representing the index of the specific sample which will be selected. Return <tt class="docutils literal"><span class="pre">null</span></tt> to stop customization process.</p>
+<p>If the <strong>flag is set with a number</strong>, then it is the index that always will be selected. If the number is negative then it counts starting from the end.</p>
+<p>Finally, jQuery.sampling() offers some default functions that you can use by using their name as string:</p>
+<dl class="docutils">
+<dt>bounce</dt>
+<dd>goes through each specific sample. When reaching the last one, reverts direction and goes to the first. When reaching the first, ir reverts direction again and so on.</dd>
+<dt>clamp</dt>
+<dd>goes through each specific sample until reaching the last one. After, it always return this last until the end of instantiaion.</dd>
+<dt>identity</dt>
+<dd>go to each sample until reaching the last one, then stops instantiation.</dd>
+<dt>none</dt>
+<dd>ends inmediatlly, with no place for instantiaion.</dd>
+<dt>rotation / altern</dt>
+<dd>goes through each specific sample. When reaching the last sample, it starts over again and so on until the end of instantiation.</dd>
+<dt>single</dt>
+<dd>always select index 0</dd>
+</dl>
 <p>Following, there is the documentation about the different ways of calling <a class="reference internal" href="#new" title="new"><tt class="xref js js-func docutils literal"><span class="pre">new()</span></tt></a>:</p>
 <dl class="function">
 <dt id="new">
@@ -311,7 +344,7 @@
 </div>
 </div>
 <div class="section" id="templating-capabilities">
-<span id="id3"></span><h2>Templating capabilities<a class="headerlink" href="#templating-capabilities" title="Permalink to this headline">¶</a></h2>
+<span id="id4"></span><h2>Templating capabilities<a class="headerlink" href="#templating-capabilities" title="Permalink to this headline">¶</a></h2>
 <p>By the moment only CSI (<strong>client side includes</strong>) are supported but other features are planned to be integrated soon.</p>
 <div class="section" id="client-side-includes">
 <h3>Client side includes<a class="headerlink" href="#client-side-includes" title="Permalink to this headline">¶</a></h3>
@@ -320,7 +353,7 @@
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;_inc&quot;</span> <span class="na">href=</span><span class="s">&quot;./menu.html&quot;</span><span class="nt">&gt;</span>This will be replaced by contents of menu.html<span class="nt">&lt;/a&gt;</span>
 </pre></div>
 </div>
-<p>Use the following code to perform CSI on the page on document ready:</p>
+<p>Use the following code to perform CSI inside the page on document ready:</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">sampling</span><span class="p">(</span><span class="s1">&#39;include&#39;</span><span class="p">);</span> <span class="p">});</span>
 </pre></div>
 </div>
@@ -333,9 +366,12 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>limit</strong> &#8211; in case of the new content is containing CSI place holders, the parameter indicates how many times the CSI process will be performed. I.e. a value of 1 indicates only one level of CSI is performed so after resolving CSI place holders for the first time, no further replacements will be done. A value of 0 means to resolve all CSI place holders.</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the total of CSI successfully resolved.</p>
 </td>
 </tr>
 </tbody>
@@ -363,6 +399,7 @@
 <li><a class="reference internal" href="#plugin-api">Plugin API</a><ul>
 <li><a class="reference internal" href="#instantiating-samples">Instantiating samples</a></li>
 <li><a class="reference internal" href="#customizing-items">Customizing items</a></li>
+<li><a class="reference internal" href="#sample-select-mode">Sample Select Mode</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#templating-capabilities">Templating capabilities</a><ul>
@@ -407,7 +444,7 @@
         <li class="right" >
           <a href="index.html" title="Welcome to jQuery.sampling()’s documentation!"
              >previous</a> |</li>
-        <li><a href="index.html">jQuery.sampling() 1.0.0-rc.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">jQuery.sampling() 1.0.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

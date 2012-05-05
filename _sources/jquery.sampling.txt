@@ -3,7 +3,7 @@
 jQuery.sampling plugin
 ======================
 
-jQuery.sampling exposes several functionallities. Main functions are related with **template animation** / **sampling** but it also includes **templating related capabilities** explained in :js:ref:`templating-capabilities`.
+jQuery.sampling exposes several functionallities. Main functions are related with **template animation** / **sampling** but it also includes **templating related capabilities** explained in :ref:`templating-capabilities`.
 
 Setup
 -----
@@ -19,9 +19,11 @@ You can configure the jQuery.sampling() plugin by calling :js:func:`jQuery.sampl
 
             {
                 sampleClass: '_s',
+                includeClass: '_inc',
                 defaultFlags: {
                     ensureText:false,
-                    clearSamples:true
+                    clearSamples:true,
+                    sampleSelectMode:'single'
                 }
             }
 
@@ -50,6 +52,9 @@ ensureText (defaults to ``false``)
 clearSamples (defaults to ``true``)
     this option removes all nested samples inside the sample being instantiated.
 
+sampleSelectMode (defaults to ``'single'``)
+    the option sets selection mode of samples when instantiating (see :ref:`instantiating-samples`)
+
 Plugin API
 ----------
 
@@ -69,13 +74,17 @@ I.e, to call :js:func:`option` to set the value of parameter ``sampleClass`` to 
 
 .. js:function:: select(selector[, noCache=false])
 
-    Applies on **sample collection** returned by :js:func:`gather`. Selects the proper sample inside the sample collection. The method is cached by the selector so succesive calls to this method have improved performance.
+    Applies on **sample collection** returned by :js:func:`gather`. Selects the proper samples inside the sample collection. The method is cached by the selector so succesive calls to this method have improved performance.
 
     :param selector: a valid jQuery selector to look for it inside the sample collection.
     :param boolean noCache: if ``true``, avoid caching by the selector and the query is re-runned. Defaults to ``false``.
     :returns:
 
-        a **jQuery sample object** with the sample. Avoid to modify this object because it's the sample itself. Use ``jQuery.clone()`` or use :js:func:`new` to build a new copy.
+        a **jQuery sample object** with the sample(s). Avoid to modify this object because it's the sample itself. Use ``jQuery.clone()`` or use :js:func:`new` to build a new copy.
+
+    .. TIP::
+
+        You can select more than one sample. It is specially useful in combination with :ref:`sample-select-modes`.
 
 .. js:function:: option(optName)
 
@@ -91,12 +100,14 @@ I.e, to call :js:func:`option` to set the value of parameter ``sampleClass`` to 
     :param string optName: name of the option to set.
     :param value: value to set.
 
+.. _instantiating-samples:
+
 Instantiating samples
 ^^^^^^^^^^^^^^^^^^^^^
 
 Sample instantiation is the most interesting part of the plugin. Instantiate refers to clone the sample and customize it.
 
-The task can be performed by calling to :js:func:`new` in several ways. The most important concept here is **customizing item**.
+The task can be performed by calling to :js:func:`new` in several ways. The most important concept here is **customizing item** and **sample selection mode**.
 
 .. _customizing-items:
 
@@ -137,6 +148,41 @@ Previous ``tr`` sample, after instantiating with the previous item should look l
         <td class="type">Starfighter</td>
         <td class="affiliation">Galactic Empire</td>
     </tr>
+
+.. _sample-select-modes:
+
+Sample Select Mode
+^^^^^^^^^^^^^^^^^^
+
+When you select more than one sample by using :js:func:`select` you can specify which specific sample will be selected to be customized by the next customization item. This can be done by setting the instantiaion flag ``sampleSelectMode``.
+
+If the **flag is set with a function**, then the function's signature should be as follows::
+
+    sampleSelector(index, length)
+
+Inside the function, ``this`` is the sample collection. Parameter ``index`` is actually the call count for the function (first time, 0; second time, 1; etc) and ``length`` is the length of the sample collection. Return value must be an integer representing the index of the specific sample which will be selected. Return ``null`` to stop customization process.
+
+If the **flag is set with a number**, then it is the index that always will be selected. If the number is negative then it counts starting from the end.
+
+Finally, jQuery.sampling() offers some default functions that you can use by using their name as string:
+
+bounce
+    goes through each specific sample. When reaching the last one, reverts direction and goes to the first. When reaching the first, ir reverts direction again and so on.
+
+clamp
+    goes through each specific sample until reaching the last one. After, it always return this last until the end of instantiaion.
+
+identity
+    go to each sample until reaching the last one, then stops instantiation.
+
+none
+    ends inmediatlly, with no place for instantiaion.
+
+rotation / altern
+    goes through each specific sample. When reaching the last sample, it starts over again and so on until the end of instantiation.
+
+single
+    always select index 0
 
 Following, there is the documentation about the different ways of calling :js:func:`new`:
 
@@ -204,13 +250,13 @@ Client side includes
 
 jQuery.sampling() includes a mechanism to perform *client side includes* (CSI). These includes act like traditional server side includes of languages such as PHP but in the client side. In few words, they are elements pointing some URL, jQuery.sampling() is able to replace these elements with the contents of URL they are pointing to.
 
-To perform a client side include, use **CSI place holders**. These are anchor elements ``<a>`` with the include class (by default ``_inc``, see :js:ref:`plugin-options`) and ``href`` attribute pointing to an URL, source of the include:
+To perform a client side include, use **CSI place holders**. These are anchor elements ``<a>`` with the include class (by default ``_inc``, see :ref:`plugin-options`) and ``href`` attribute pointing to an URL, source of the include:
 
 .. code-block:: html
 
     <a class="_inc" href="./menu.html">This will be replaced by contents of menu.html</a>
 
-Use the following code to perform CSI on the page on document ready::
+Use the following code to perform CSI inside the page on document ready::
 
     $(function() { $(document).sampling('include'); });
 
@@ -221,3 +267,4 @@ Use the following code to perform CSI on the page on document ready::
     Note how new content can include more CSI place holders. By default, they will be resolved too but the developer can limitate the bahaviour by passing a non-zero value as parameter ``limit``.
 
     :param limit: in case of the new content is containing CSI place holders, the parameter indicates how many times the CSI process will be performed. I.e. a value of 1 indicates only one level of CSI is performed so after resolving CSI place holders for the first time, no further replacements will be done. A value of 0 means to resolve all CSI place holders.
+    :returns: the total of CSI successfully resolved.
