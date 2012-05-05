@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>jQuery Sampling | Samples | Sample Selection Modes</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+
+        <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript" language="javascript" charset="utf-8" ></script>
+
+        <script src="../jquery.sampling.js"></script>
+        <script type="text/javascript" language="javascript" charset="utf-8">
+            var $samples, $row_sample, $row;
+
+            $(document).ready(function() {
+                // Get data
+                var maps = [];
+                $.ajax({
+                    async: false,
+                    url:'data.json',
+                    dataType: 'json',
+                    success: function(data) {
+                        $.each(data, function(index, ship){
+                            maps.push({
+                                '.id':ship.id,
+                                '.name':ship.name,
+                                '.type':ship.type,
+                                '.affiliation':ship.affiliation
+                            });
+                        });
+                    }
+                });
+
+                //1: Gather samples
+                $samples = $(document).sampling('gather');
+
+                function buildTable(mode) {
+                    //2: Select examples
+                    $row_samples = $($samples.sampling('select', '.red, .green, .blue'));
+
+                    //3: Customize them
+                    $rows = $row_samples.sampling('new', maps, {sampleSelectMode:mode});
+
+                    //4: Add to the document
+                    $('tbody').html($rows);
+                };
+
+                $('button').click(function() {
+                    buildTable(this.id);
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Star Wars Spaceship Table</h1>
+        <table id="spaceship_table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Affiliation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="_s red" title="Red row">
+                    <td class="id">sample_id1</td>
+                    <td class="name">sample_name1</td>
+                    <td class="type">sample_type1</td>
+                    <td class="affiliation">sample_affiliation1</td>
+                </tr>
+                <tr class="_s green" title="Green row">
+                    <td class="id">sample_id2</td>
+                    <td class="name">sample_name2</td>
+                    <td class="type">sample_type2</td>
+                    <td class="affiliation">sample_affiliation2</td>
+                </tr>
+                <tr class="_s blue" title="Blue row">
+                    <td class="id">sample_id3</td>
+                    <td class="name">sample_name3</td>
+                    <td class="type">sample_type3</td>
+                    <td class="affiliation">sample_affiliation3</td>
+                </tr>
+            </tbody>
+        </table>
+        <section style="width:100%; margin:1em 0; text-align:center;">
+            <p>Select a sample selection mode:</p>
+            <button id="rotation">rotate</button>
+            <button id="bounce">bounce</button>
+            <button id="clamp">clamp</button>
+            <button id="identity">identity</button>
+            <button id="single">single</button>
+            <button id="none">none</button>
+        </section>
+    </body>
+</html>
